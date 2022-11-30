@@ -9,6 +9,7 @@ public class InputHandler : MonoBehaviour
     private Controls input;
     [SerializeField] private MoveObject pieceMovement;
     //[SerializeField] private MoveObject piecePlacement;
+    [SerializeField] private RotateBoard rotateBoard;
 
 
     private void Awake()
@@ -21,5 +22,6 @@ public class InputHandler : MonoBehaviour
     private void OnEnable()
     {
         var _ = new QuitHandler(input.GamePiece.Quit);
+        var rotateHandler = new RotateHandler(input.GamePiece.Rotate, this.rotateBoard);
     }
 }
