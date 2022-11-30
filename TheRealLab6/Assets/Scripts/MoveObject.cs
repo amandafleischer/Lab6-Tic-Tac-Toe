@@ -26,7 +26,7 @@ namespace FleischerFouts.Lab6
         void Start()
         {
             Debug.Log(emptyCells[0].name);
-            spotSelect = Instantiate(xChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity);
+            spotSelect = Instantiate(xChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
         }
 
         public void Initialize(InputAction moveAction, InputAction placeAction)
