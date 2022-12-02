@@ -1728,6 +1728,10 @@ MonoBehaviour:
 
     Click "R" to rotate the board
 
+
+    Click
+    escape at any time to quit
+
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16c47559073f748b18d3558ca9550875, type: 2}
@@ -2931,6 +2935,10 @@ MonoBehaviour:
 
 
     Click "R" to rotate the board
+
+
+    Click
+    escape at any time to quit
 
 '
   m_isRightToLeft: 0
