@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class MultiPlayerClick : MonoBehaviour
 {
-    [SerializeField] GameObject canvas;
+    [SerializeField] GameObject mainMenu;
+    [SerializeField] GameObject playMenu;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        playMenu.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -20,8 +21,9 @@ public class MultiPlayerClick : MonoBehaviour
 
     public void buttonClick()
     {
-        //starts multi-player game, hides UI
+        //starts multi-player game, hides main menu, starts game UI
         Debug.Log("Multi-Player Game");
-        canvas.gameObject.SetActive(false);
+        mainMenu.gameObject.SetActive(false);
+        playMenu.gameObject.SetActive(true);
     }
 }
