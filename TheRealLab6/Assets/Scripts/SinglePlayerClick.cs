@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SinglePlayerClick : MonoBehaviour
 {
+    [SerializeField] GameObject canvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,8 @@ public class SinglePlayerClick : MonoBehaviour
 
     public void buttonClicked()
     {
+        //starts single player game, hides UI
         Debug.Log("Single Player Game");
+        canvas.gameObject.SetActive(false);
     }
 }

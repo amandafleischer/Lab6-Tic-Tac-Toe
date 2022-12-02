@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MultiPlayerClick : MonoBehaviour
 {
+    [SerializeField] GameObject canvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +20,8 @@ public class MultiPlayerClick : MonoBehaviour
 
     public void buttonClick()
     {
+        //starts multi-player game, hides UI
         Debug.Log("Multi-Player Game");
+        canvas.gameObject.SetActive(false);
     }
 }

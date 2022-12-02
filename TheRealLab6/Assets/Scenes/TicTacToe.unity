@@ -2000,6 +2000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5017176f2177c4074862481f3d2b966f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 1321175861}
 --- !u!1 &738636934
 GameObject:
   m_ObjectHideFlags: 0
@@ -3602,7 +3603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1321175862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5810,6 +5811,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c538afb313f8a48c2b29a82a84d60770, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 1321175861}
 --- !u!1 &2140956292
 GameObject:
   m_ObjectHideFlags: 0
