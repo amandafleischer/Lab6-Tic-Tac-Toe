@@ -15,6 +15,7 @@ namespace FleischerFouts.Lab6
         [SerializeField] GameObject xPlacedPrefab;
         [SerializeField] GameObject oPlacedPrefab;
         [SerializeField] GameObject parent;
+        [SerializeField] GameObject singlePlayerUI;
 
 
         private InputAction action;
@@ -70,7 +71,11 @@ namespace FleischerFouts.Lab6
             }
             else
             {
-                spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
+                //if in single player mode, no need to instantiate choosing prefab
+                if (!singlePlayerUI.gameObject.activeSelf)
+                {
+                    spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
+                }
             }
             
         }
@@ -85,7 +90,17 @@ namespace FleischerFouts.Lab6
             }
             else
             {
-                Instantiate(oPlacedPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
+                //if in single player mode, choose a random empty cell to place game piece
+                if (singlePlayerUI.gameObject.activeSelf)
+                {
+                    cellPosition = Random.Range(0, emptyCells.Count);
+                    Instantiate(oPlacedPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
+
+                }
+                else
+                {
+                    Instantiate(oPlacedPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
+                }
             }
 
             isXPiece = !isXPiece;
@@ -101,7 +116,11 @@ namespace FleischerFouts.Lab6
             }
             else
             {
-                spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
+                ////if in single player mode, no need to instantiate choosing prefab
+                if (!singlePlayerUI.gameObject.activeSelf)
+                {
+                    spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
+                }
             }
         }
 
