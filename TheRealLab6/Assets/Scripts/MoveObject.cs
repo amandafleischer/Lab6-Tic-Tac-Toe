@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 //written by Hannah
-//edits by Amanda for Instantiate and single player mode (bot)
+//edits by Amanda for Instantiate parenting and single player mode (bot)
 
 namespace FleischerFouts.Lab6
 {
