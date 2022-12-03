@@ -116,7 +116,7 @@ namespace FleischerFouts.Lab6
             }
             else
             {
-                ////if in single player mode, no need to instantiate choosing prefab
+                //if in single player mode, no need to instantiate choosing prefab
                 if (!singlePlayerUI.gameObject.activeSelf)
                 {
                     spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
