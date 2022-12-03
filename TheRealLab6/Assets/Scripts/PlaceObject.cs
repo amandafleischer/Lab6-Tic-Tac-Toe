@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using FleischerFouts.Lab6;
 
-public class PlaceObject : MonoBehaviour
+//written by Hannah
+
+namespace FleischerFouts.Lab6
 {
-    [SerializeField] GameObject xPlacedPrefab;
-    [SerializeField] GameObject oPlacedPrefab;
+    public class PlaceObject : MonoBehaviour
+    {
+        [SerializeField] GameObject xPlacedPrefab;
+        [SerializeField] GameObject oPlacedPrefab;
 
-    private InputAction action;
-   
-
+        private InputAction action;
+    }
 }

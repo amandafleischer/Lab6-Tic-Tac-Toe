@@ -2,28 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SinglePlayerClick : MonoBehaviour
+//written by Amanda
+
+namespace FleischerFouts.Lab6
 {
-    [SerializeField] GameObject mainMenu;
-    [SerializeField] GameObject playMenu;
-
-    // Start is called before the first frame update
-    void Start()
+    public class SinglePlayerClick : MonoBehaviour
     {
-        playMenu.gameObject.SetActive(false);
-    }
+        [SerializeField] GameObject mainMenu;
+        [SerializeField] GameObject playMenu;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            playMenu.gameObject.SetActive(false);
+        }
 
-    public void buttonClicked()
-    {
-        //starts single player game, hides main menu, starts game UI
-        Debug.Log("Single Player Game");
-        mainMenu.gameObject.SetActive(false);
-        playMenu.gameObject.SetActive(true);
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public void buttonClicked()
+        {
+            //starts single player game, hides main menu, starts game UI
+            Debug.Log("Single Player Game");
+            mainMenu.gameObject.SetActive(false);
+            playMenu.gameObject.SetActive(true);
+        }
     }
 }

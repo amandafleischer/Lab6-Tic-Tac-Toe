@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//written by Hannah
+//edits by Amanda for Instantiate and single player mode (bot)
+
 namespace FleischerFouts.Lab6
 {
     public class MoveObject : MonoBehaviour
@@ -15,7 +18,7 @@ namespace FleischerFouts.Lab6
         [SerializeField] GameObject xPlacedPrefab;
         [SerializeField] GameObject oPlacedPrefab;
         [SerializeField] GameObject parent;
-        //will be used later to tell if single player game is active 
+        //will be used later to tell if single player game is active (bot) 
         [SerializeField] GameObject singlePlayerUI;
 
         private InputAction action;
@@ -71,7 +74,7 @@ namespace FleischerFouts.Lab6
             }
             else
             {
-                //if in single player mode, no need to instantiate choosing prefab
+                //if in single player mode, no need to instantiate choosing prefab (bot)
                 if (!singlePlayerUI.gameObject.activeSelf)
                 {
                     spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
@@ -90,7 +93,7 @@ namespace FleischerFouts.Lab6
             }
             else
             {
-                //if in single player mode, choose a random empty cell to place game piece
+                //if in single player mode, choose a random empty cell to place game piece (bot)
                 if (singlePlayerUI.gameObject.activeSelf)
                 {
                     cellPosition = Random.Range(0, emptyCells.Count);
@@ -116,7 +119,7 @@ namespace FleischerFouts.Lab6
             }
             else
             {
-                //if in single player mode, no need to instantiate choosing prefab
+                //if in single player mode, no need to instantiate choosing prefab (bot)
                 if (!singlePlayerUI.gameObject.activeSelf)
                 {
                     spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);

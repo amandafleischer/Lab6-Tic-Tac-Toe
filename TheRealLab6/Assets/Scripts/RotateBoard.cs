@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+//written by Amanda
 
 namespace FleischerFouts.Lab6
 {
@@ -10,12 +11,6 @@ namespace FleischerFouts.Lab6
     {
         private InputAction inputAction;
         private GameObject[] gamePieces;
-
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
 
         public void Rotation()
         {
