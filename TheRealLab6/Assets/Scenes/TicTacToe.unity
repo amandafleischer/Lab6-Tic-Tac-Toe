@@ -1726,11 +1726,14 @@ MonoBehaviour:
     "enter" to place your game piece
 
 
-    Click "R" to rotate the board
+    Click "enter" to see the bot''s move
 
 
     Click
-    escape at any time to quit
+    "R" to rotate the board
+
+
+    Click escape at any time to quit
 
 '
   m_isRightToLeft: 0
@@ -4054,6 +4057,7 @@ MonoBehaviour:
   xPlacedPrefab: {fileID: 8529260594680504552, guid: 5114241483757da47835313224a8ac7c, type: 3}
   oPlacedPrefab: {fileID: 9007005081170149242, guid: 7f3ba8a1af880be4280fb1d226151f93, type: 3}
   parent: {fileID: 678819197}
+  singlePlayerUI: {fileID: 646592206}
 --- !u!4 &1104854921
 Transform:
   m_ObjectHideFlags: 0

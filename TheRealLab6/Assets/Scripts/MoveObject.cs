@@ -15,8 +15,8 @@ namespace FleischerFouts.Lab6
         [SerializeField] GameObject xPlacedPrefab;
         [SerializeField] GameObject oPlacedPrefab;
         [SerializeField] GameObject parent;
+        //will be used later to tell if single player game is active 
         [SerializeField] GameObject singlePlayerUI;
-
 
         private InputAction action;
 
