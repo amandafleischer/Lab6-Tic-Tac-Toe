@@ -64,6 +64,15 @@ namespace FleischerFouts
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""5b56142d-5bb2-4a59-a0d6-98fa145ea380"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -143,6 +152,17 @@ namespace FleischerFouts
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c4773d84-29ea-4ec3-a3e4-39528af4ce7d"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -155,6 +175,7 @@ namespace FleischerFouts
             m_GamePiece_Quit = m_GamePiece.FindAction("Quit", throwIfNotFound: true);
             m_GamePiece_PlacePiece = m_GamePiece.FindAction("PlacePiece", throwIfNotFound: true);
             m_GamePiece_Rotate = m_GamePiece.FindAction("Rotate", throwIfNotFound: true);
+            m_GamePiece_Restart = m_GamePiece.FindAction("Restart", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -218,6 +239,7 @@ namespace FleischerFouts
         private readonly InputAction m_GamePiece_Quit;
         private readonly InputAction m_GamePiece_PlacePiece;
         private readonly InputAction m_GamePiece_Rotate;
+        private readonly InputAction m_GamePiece_Restart;
         public struct GamePieceActions
         {
             private @Controls m_Wrapper;
@@ -226,6 +248,7 @@ namespace FleischerFouts
             public InputAction @Quit => m_Wrapper.m_GamePiece_Quit;
             public InputAction @PlacePiece => m_Wrapper.m_GamePiece_PlacePiece;
             public InputAction @Rotate => m_Wrapper.m_GamePiece_Rotate;
+            public InputAction @Restart => m_Wrapper.m_GamePiece_Restart;
             public InputActionMap Get() { return m_Wrapper.m_GamePiece; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -247,6 +270,9 @@ namespace FleischerFouts
                     @Rotate.started -= m_Wrapper.m_GamePieceActionsCallbackInterface.OnRotate;
                     @Rotate.performed -= m_Wrapper.m_GamePieceActionsCallbackInterface.OnRotate;
                     @Rotate.canceled -= m_Wrapper.m_GamePieceActionsCallbackInterface.OnRotate;
+                    @Restart.started -= m_Wrapper.m_GamePieceActionsCallbackInterface.OnRestart;
+                    @Restart.performed -= m_Wrapper.m_GamePieceActionsCallbackInterface.OnRestart;
+                    @Restart.canceled -= m_Wrapper.m_GamePieceActionsCallbackInterface.OnRestart;
                 }
                 m_Wrapper.m_GamePieceActionsCallbackInterface = instance;
                 if (instance != null)
@@ -263,6 +289,9 @@ namespace FleischerFouts
                     @Rotate.started += instance.OnRotate;
                     @Rotate.performed += instance.OnRotate;
                     @Rotate.canceled += instance.OnRotate;
+                    @Restart.started += instance.OnRestart;
+                    @Restart.performed += instance.OnRestart;
+                    @Restart.canceled += instance.OnRestart;
                 }
             }
         }
@@ -273,6 +302,7 @@ namespace FleischerFouts
             void OnQuit(InputAction.CallbackContext context);
             void OnPlacePiece(InputAction.CallbackContext context);
             void OnRotate(InputAction.CallbackContext context);
+            void OnRestart(InputAction.CallbackContext context);
         }
     }
 }

@@ -14,6 +14,7 @@ namespace FleischerFouts.Lab6
         [SerializeField] private MoveObject pieceMovement;
         //[SerializeField] private MoveObject piecePlacement;
         [SerializeField] private RotateBoard rotateBoard;
+        [SerializeField] private RestartGame restartGame;
 
 
         private void Awake()
@@ -27,6 +28,7 @@ namespace FleischerFouts.Lab6
         {
             var _ = new QuitHandler(input.GamePiece.Quit);
             var rotateHandler = new RotateHandler(input.GamePiece.Rotate, this.rotateBoard);
+            var restartHandler = new RestartHandler(input.GamePiece.Restart, this.restartGame);
         }
     }
 }
