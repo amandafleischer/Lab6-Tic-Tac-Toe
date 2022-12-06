@@ -3080,7 +3080,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Player X Wins!
+  m_text: Player 1 Wins!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 16c47559073f748b18d3558ca9550875, type: 2}
   m_sharedMaterial: {fileID: -3008087202076823060, guid: 16c47559073f748b18d3558ca9550875, type: 2}
@@ -4239,6 +4239,8 @@ MonoBehaviour:
   oPlacedPrefab: {fileID: 9007005081170149242, guid: 7f3ba8a1af880be4280fb1d226151f93, type: 3}
   parent: {fileID: 678819197}
   singlePlayerUI: {fileID: 646592206}
+  MultiPlayerUI: {fileID: 570059886}
+  gameOverUI: {fileID: 1464348567}
 --- !u!4 &1104854921
 Transform:
   m_ObjectHideFlags: 0

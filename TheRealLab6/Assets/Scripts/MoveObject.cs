@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 //written by Hannah
-//edits by Amanda for Instantiate parenting and single player mode (bot)
+//edits by Amanda for Instantiate parenting, single player mode (bot), and game over
 
 namespace FleischerFouts.Lab6
 {
@@ -20,6 +20,8 @@ namespace FleischerFouts.Lab6
         [SerializeField] GameObject parent;
         //will be used later to tell if single player game is active (bot) 
         [SerializeField] GameObject singlePlayerUI;
+        [SerializeField] GameObject MultiPlayerUI;
+        [SerializeField] GameObject gameOverUI;
 
         private InputAction action;
 
@@ -113,17 +115,25 @@ namespace FleischerFouts.Lab6
 
             cellPosition = 0;
 
-            if (isXPiece)
+            if (emptyCells.Count > 0)
             {
-                spotSelect = Instantiate(xChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
-            }
-            else
-            {
-                //if in single player mode, no need to instantiate choosing prefab (bot)
-                if (!singlePlayerUI.gameObject.activeSelf)
+                if (isXPiece)
                 {
-                    spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
+                    spotSelect = Instantiate(xChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
                 }
+                else
+                {
+                    //if in single player mode, no need to instantiate choosing prefab (bot)
+                    if (!singlePlayerUI.gameObject.activeSelf)
+                    {
+                        spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
+                    }
+                }
+            } else
+            {
+                gameOverUI.gameObject.SetActive(true);
+                singlePlayerUI.gameObject.SetActive(false);
+                MultiPlayerUI.gameObject.SetActive(false);
             }
         }
 
