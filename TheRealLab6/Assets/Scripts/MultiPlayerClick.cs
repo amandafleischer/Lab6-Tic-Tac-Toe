@@ -19,12 +19,6 @@ namespace FleischerFouts.Lab6
             gameOver.gameObject.SetActive(false);
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         public void buttonClick()
         {
             //starts multi-player game, hides main menu, starts game UI

@@ -12,17 +12,10 @@ namespace FleischerFouts.Lab6
         [SerializeField] GameObject playMenu;
         [SerializeField] GameObject gameOver;
 
-        // Start is called before the first frame update
         void Start()
         {
             playMenu.gameObject.SetActive(false);
             gameOver.gameObject.SetActive(false);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
 
         public void buttonClicked()

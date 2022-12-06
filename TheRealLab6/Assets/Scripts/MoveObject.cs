@@ -130,7 +130,7 @@ namespace FleischerFouts.Lab6
                     }
                 }
             } else
-            {
+            {//diplay game over once there are no empty spaces left
                 gameOverUI.gameObject.SetActive(true);
                 singlePlayerUI.gameObject.SetActive(false);
                 MultiPlayerUI.gameObject.SetActive(false);

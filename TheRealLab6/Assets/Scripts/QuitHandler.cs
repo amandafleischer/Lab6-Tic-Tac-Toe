@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class QuitHandler : MonoBehaviour
+public class QuitHandler 
 {
     public QuitHandler(InputAction quitAction)
     {
