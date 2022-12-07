@@ -26,6 +26,7 @@ namespace FleischerFouts.Lab6
         [SerializeField] GameObject MultiPlayerUI;
         [SerializeField] GameObject gameOverUI;
 
+        //Text to update on score board
         [SerializeField] TMP_Text singlePlayer1;
         [SerializeField] TMP_Text botPlayer;
         [SerializeField] TMP_Text multiPlayer1;
@@ -144,7 +145,7 @@ namespace FleischerFouts.Lab6
             if (emptyCells.Count > 0)
             {
                 if (isXPiece)
-                {
+                { 
                     spotSelect = Instantiate(xChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
                 }
                 else
@@ -159,8 +160,9 @@ namespace FleischerFouts.Lab6
             else
             {//display game over once there are no empty spaces left
                 gameOverUI.gameObject.SetActive(true);
+                //displays the winner
                 if (xPoints > oPoints)
-                {
+                { 
                     winner.text = "Player 1 Wins!";
                 } else if (oPoints > xPoints)
                 {
@@ -220,7 +222,7 @@ namespace FleischerFouts.Lab6
                         xPoints++;
                         Debug.Log("Row - X Points: " + xPoints);
                         if (singlePlayerUI.activeSelf)
-                        {
+                        {//updates score board for player 1
                             singlePlayer1.text = "Player 1 (X) - " + xPoints;
                         } else
                         {
@@ -232,7 +234,7 @@ namespace FleischerFouts.Lab6
                         oPoints++;
                         Debug.Log("Row - O Points: " + oPoints);
                         if (singlePlayerUI.activeSelf)
-                        {
+                        {//updates score board for player 2
                             botPlayer.text = "Bot (O) - " + oPoints;
                         }
                         else
@@ -256,7 +258,7 @@ namespace FleischerFouts.Lab6
                         xPoints++;
                         Debug.Log("Column - X Points: " + xPoints);
                         if (singlePlayerUI.activeSelf)
-                        {
+                        {//updates score board for player 1
                             singlePlayer1.text = "Player 1 (X) - " + xPoints;
                         }
                         else
@@ -269,7 +271,7 @@ namespace FleischerFouts.Lab6
                         oPoints++;
                         Debug.Log("Column - O Points: " + oPoints);
                         if (singlePlayerUI.activeSelf)
-                        {
+                        {//updates score board for player 2
                             botPlayer.text = "Bot (O) - " + oPoints;
                         }
                         else
@@ -293,7 +295,7 @@ namespace FleischerFouts.Lab6
                         xPoints++;
                         Debug.Log("Level - X Points: " + xPoints);
                         if (singlePlayerUI.activeSelf)
-                        {
+                        {//updates score board for player 1
                             singlePlayer1.text = "Player 1 (X) - " + xPoints;
                         }
                         else
@@ -306,7 +308,7 @@ namespace FleischerFouts.Lab6
                         oPoints++;
                         Debug.Log("Level - O Points: " + oPoints);
                         if (singlePlayerUI.activeSelf)
-                        {
+                        {//updates score board for player 2
                             botPlayer.text = "Bot (O) - " + oPoints;
                         }
                         else
@@ -369,7 +371,7 @@ namespace FleischerFouts.Lab6
                     xPoints++;
                     Debug.Log("Diag - X Points: " + xPoints);
                     if (singlePlayerUI.activeSelf)
-                    {
+                    {//updates score board for player 1
                         singlePlayer1.text = "Player 1 (X) - " + xPoints;
                     }
                     else
@@ -382,7 +384,7 @@ namespace FleischerFouts.Lab6
                     oPoints++;
                     Debug.Log("Diag - O Points: " + oPoints);
                     if (singlePlayerUI.activeSelf)
-                    {
+                    {//updates score board for player 2
                         botPlayer.text = "Bot (O) - " + oPoints;
                     }
                     else
@@ -392,7 +394,5 @@ namespace FleischerFouts.Lab6
                 }
             }
         }
-
-
     }
 }
