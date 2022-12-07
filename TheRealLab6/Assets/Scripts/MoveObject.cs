@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,8 @@ namespace FleischerFouts.Lab6
     public class MoveObject : MonoBehaviour
     {
         [SerializeField] List<GameObject> emptyCells = new List<GameObject>();
-        List<GameObject> filledCells = new List<GameObject>();
+        List<GameObject> xCells = new List<GameObject>();
+        List<GameObject> oCells = new List<GameObject>();
 
         [SerializeField] GameObject xChoosingPrefab;
         [SerializeField] GameObject oChoosingPrefab;
@@ -29,9 +31,12 @@ namespace FleischerFouts.Lab6
         int cellPosition = 0;
         bool isXPiece = true;
 
+        int xPoints = 0;
+        int oPoints = 0;
+
+
         void Start()
         {
-            Debug.Log(emptyCells[0].name);
             spotSelect = Instantiate(xChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
         }
 
@@ -55,16 +60,16 @@ namespace FleischerFouts.Lab6
             {
                 cellPosition += 1;
 
-                if(cellPosition >= emptyCells.Count)
+                if (cellPosition >= emptyCells.Count)
                 {
                     cellPosition = 0;
                 }
             }
-            else if(moveInput.x == -1)
+            else if (moveInput.x == -1)
             {
                 cellPosition -= 1;
 
-                if(cellPosition < 0)
+                if (cellPosition < 0)
                 {
                     cellPosition = emptyCells.Count - 1;
                 }
@@ -82,14 +87,14 @@ namespace FleischerFouts.Lab6
                     spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
                 }
             }
-            
+
         }
 
         private void PlacePiece(InputAction.CallbackContext context)
         {
             Destroy(spotSelect);
 
-            if(isXPiece)
+            if (isXPiece)
             {
                 Instantiate(xPlacedPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
             }
@@ -98,7 +103,7 @@ namespace FleischerFouts.Lab6
                 //if in single player mode, choose a random empty cell to place game piece (bot)
                 if (singlePlayerUI.gameObject.activeSelf)
                 {
-                    cellPosition = Random.Range(0, emptyCells.Count);
+                    cellPosition = UnityEngine.Random.Range(0, emptyCells.Count);
                     Instantiate(oPlacedPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
 
                 }
@@ -108,9 +113,19 @@ namespace FleischerFouts.Lab6
                 }
             }
 
+
+            if (isXPiece)
+            {
+                xCells.Add(emptyCells[cellPosition]);
+            }
+            else
+            {
+                oCells.Add(emptyCells[cellPosition]);
+            }
+
+            CheckForRow();
             isXPiece = !isXPiece;
 
-            filledCells.Add(emptyCells[cellPosition]);
             emptyCells.Remove(emptyCells[cellPosition]);
 
             cellPosition = 0;
@@ -129,13 +144,171 @@ namespace FleischerFouts.Lab6
                         spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
                     }
                 }
-            } else
-            {//diplay game over once there are no empty spaces left
+            }
+            else
+            {//display game over once there are no empty spaces left
                 gameOverUI.gameObject.SetActive(true);
                 singlePlayerUI.gameObject.SetActive(false);
                 MultiPlayerUI.gameObject.SetActive(false);
             }
         }
+
+        private void CheckForRow()
+        {
+            List<GameObject> filledCells = new List<GameObject>();
+
+            if (isXPiece)
+            {
+                filledCells = xCells;
+            }
+            else
+            {
+                filledCells = oCells;
+            }
+
+
+            if (filledCells.Count >= 3)
+            {
+                for (int x = 0; x < filledCells.Count - 2; x++)
+                {
+                    for (int y = x + 1; y < filledCells.Count - 1; y++)
+                    {
+                        string pieceOne = filledCells[x].name;
+                        string pieceTwo = filledCells[y].name;
+                        string newPiece = filledCells[filledCells.Count - 1].name;
+
+                        CheckRowWin(pieceOne, pieceTwo, newPiece);
+                        CheckColumnWin(pieceOne, pieceTwo, newPiece);
+                        CheckLevelWin(pieceOne, pieceTwo, newPiece);
+                        CheckDiagonalWin(pieceOne, pieceTwo, newPiece);
+                    }
+                }
+            }
+        }
+
+        private void CheckRowWin(string one, string two, string three)
+        {
+            if (one[0] == two[0] && two[0] == three[0])
+            {
+                if (one[1] == two[1] && two[1] == three[1])
+                {
+                    //Debug.Log("" + one[0] + one[1] + one[2] + " " + two[0] + two[1] + two[2] + " " + three[0] + three[1] + three[2]);
+
+                    if (isXPiece)
+                    {
+                        xPoints++;
+                        Debug.Log("Row - X Points: " + xPoints);
+                    }
+                    else
+                    {
+                        oPoints++;
+                        Debug.Log("Row - O Points: " + oPoints);
+                    }
+
+                }
+            }
+        }
+
+        private void CheckColumnWin(string one, string two, string three)
+        {
+            if (one[0] == two[0] && two[0] == three[0])
+            {
+                if (one[2] == two[2] && two[2] == three[2])
+                {
+                    if (isXPiece)
+                    {
+                        xPoints++;
+                        Debug.Log("Column - X Points: " + xPoints);
+                    }
+                    else
+                    {
+                        oPoints++;
+                        Debug.Log("Column - O Points: " + oPoints);
+                    }
+
+                }
+            }
+        }
+
+        private void CheckLevelWin(string one, string two, string three)
+        {
+            if (one[1] == two[1] && two[1] == three[1])
+            {
+                if (one[2] == two[2] && two[2] == three[2])
+                {
+                    if (isXPiece)
+                    {
+                        xPoints++;
+                        Debug.Log("Level - X Points: " + xPoints);
+                    }
+                    else
+                    {
+                        oPoints++;
+                        Debug.Log("Level - O Points: " + oPoints);
+                    }
+
+                }
+            }
+        }
+
+        private void CheckDiagonalWin(string one, string two, string three)
+        {
+            if ((one[0] == two[0] && two[0] == three[0]) || ((one[0] != two[0] && two[0] != three[0]) && one[0] != three[0]))
+            {
+                one = one.Substring(1);
+                two = two.Substring(1);
+                three = three.Substring(1);
+
+                if (String.Equals(one, "22"))
+                {
+                    CheckCornersWin(two, three);
+                }
+                else if (String.Equals(two, "22"))
+                {
+                    CheckCornersWin(one, three);
+                }
+                else if (String.Equals(three, "22"))
+                {
+                    CheckCornersWin(two, one);
+                }
+            }
+        }
+
+        private void CheckCornersWin(string cornerOne, string cornerTwo)
+        {
+            bool point = false;
+            if (String.Equals(cornerOne, "11") && String.Equals(cornerTwo, "33"))
+            {
+                point = true;
+            }
+            else if (String.Equals(cornerOne, "33") && String.Equals(cornerTwo, "11"))
+            {
+                point = true;
+            }
+            else if (String.Equals(cornerOne, "13") && String.Equals(cornerTwo, "31"))
+            {
+                point = true;
+            }
+            else if (String.Equals(cornerOne, "31") && String.Equals(cornerTwo, "13"))
+            {
+                point = true;
+            }
+
+            if (point)
+            {
+                if (isXPiece)
+                {
+                    xPoints++;
+                    Debug.Log("Diag - X Points: " + xPoints);
+                }
+                else
+                {
+                    oPoints++;
+                    Debug.Log("Diag - O Points: " + oPoints);
+                }
+            }
+        }
+
 
     }
 }

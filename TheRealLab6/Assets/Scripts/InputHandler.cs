@@ -12,7 +12,6 @@ namespace FleischerFouts.Lab6
     {
         private Controls input;
         [SerializeField] private MoveObject pieceMovement;
-        //[SerializeField] private MoveObject piecePlacement;
         [SerializeField] private RotateBoard rotateBoard;
         [SerializeField] private RestartGame restartGame;
 
@@ -21,7 +20,6 @@ namespace FleischerFouts.Lab6
         {
             input = new Controls();
             pieceMovement.Initialize(input.GamePiece.MovePiece, input.GamePiece.PlacePiece);
-            //piecePlacement.Initialize(input.GamePiece.PlacePiece);
         }
 
         private void OnEnable()
