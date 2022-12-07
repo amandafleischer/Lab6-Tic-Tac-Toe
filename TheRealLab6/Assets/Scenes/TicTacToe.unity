@@ -755,7 +755,7 @@ GameObject:
   - component: {fileID: 281315269}
   - component: {fileID: 281315268}
   m_Layer: 5
-  m_Name: Player1
+  m_Name: Player1M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3114,7 +3114,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -4241,6 +4241,11 @@ MonoBehaviour:
   singlePlayerUI: {fileID: 646592206}
   MultiPlayerUI: {fileID: 570059886}
   gameOverUI: {fileID: 1464348567}
+  singlePlayer1: {fileID: 1364375063}
+  botPlayer: {fileID: 210796719}
+  multiPlayer1: {fileID: 281315268}
+  multiPlayer2: {fileID: 1877745806}
+  winner: {fileID: 818578967}
 --- !u!4 &1104854921
 Transform:
   m_ObjectHideFlags: 0
@@ -4762,7 +4767,7 @@ GameObject:
   - component: {fileID: 1364375064}
   - component: {fileID: 1364375063}
   m_Layer: 5
-  m_Name: Player1
+  m_Name: Player1S
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6895,7 +6900,7 @@ GameObject:
   - component: {fileID: 1877745807}
   - component: {fileID: 1877745806}
   m_Layer: 5
-  m_Name: Player 2
+  m_Name: Player2M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

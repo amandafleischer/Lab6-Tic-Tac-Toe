@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 //written by Hannah
 //edits by Amanda for Instantiate parenting, single player mode (bot), and game over
@@ -24,6 +25,16 @@ namespace FleischerFouts.Lab6
         [SerializeField] GameObject singlePlayerUI;
         [SerializeField] GameObject MultiPlayerUI;
         [SerializeField] GameObject gameOverUI;
+
+        [SerializeField] TMP_Text singlePlayer1;
+        [SerializeField] TMP_Text botPlayer;
+        [SerializeField] TMP_Text multiPlayer1;
+        [SerializeField] TMP_Text multiPlayer2;
+        [SerializeField] TMP_Text winner;
+
+
+
+
 
         private InputAction action;
 
@@ -148,6 +159,16 @@ namespace FleischerFouts.Lab6
             else
             {//display game over once there are no empty spaces left
                 gameOverUI.gameObject.SetActive(true);
+                if (xPoints > oPoints)
+                {
+                    winner.text = "Player 1 Wins!";
+                } else if (oPoints > xPoints)
+                {
+                    winner.text = "Player 2 Wins!";
+                } else
+                {
+                    winner.text = "Tie Game!";
+                }
                 singlePlayerUI.gameObject.SetActive(false);
                 MultiPlayerUI.gameObject.SetActive(false);
             }
@@ -198,11 +219,26 @@ namespace FleischerFouts.Lab6
                     {
                         xPoints++;
                         Debug.Log("Row - X Points: " + xPoints);
+                        if (singlePlayerUI.activeSelf)
+                        {
+                            singlePlayer1.text = "Player 1 (X) - " + xPoints;
+                        } else
+                        {
+                            multiPlayer1.text = "Player 1 (X) - " + xPoints;
+                        }
                     }
                     else
                     {
                         oPoints++;
                         Debug.Log("Row - O Points: " + oPoints);
+                        if (singlePlayerUI.activeSelf)
+                        {
+                            botPlayer.text = "Bot (O) - " + oPoints;
+                        }
+                        else
+                        {
+                            multiPlayer2.text = "Player 2 (O) - " + oPoints;
+                        }
                     }
 
                 }
@@ -219,11 +255,27 @@ namespace FleischerFouts.Lab6
                     {
                         xPoints++;
                         Debug.Log("Column - X Points: " + xPoints);
+                        if (singlePlayerUI.activeSelf)
+                        {
+                            singlePlayer1.text = "Player 1 (X) - " + xPoints;
+                        }
+                        else
+                        {
+                            multiPlayer1.text = "Player 1 (X) - " + xPoints;
+                        }
                     }
                     else
                     {
                         oPoints++;
                         Debug.Log("Column - O Points: " + oPoints);
+                        if (singlePlayerUI.activeSelf)
+                        {
+                            botPlayer.text = "Bot (O) - " + oPoints;
+                        }
+                        else
+                        {
+                            multiPlayer2.text = "Player 2 (O) - " + oPoints;
+                        }
                     }
 
                 }
@@ -240,11 +292,27 @@ namespace FleischerFouts.Lab6
                     {
                         xPoints++;
                         Debug.Log("Level - X Points: " + xPoints);
+                        if (singlePlayerUI.activeSelf)
+                        {
+                            singlePlayer1.text = "Player 1 (X) - " + xPoints;
+                        }
+                        else
+                        {
+                            multiPlayer1.text = "Player 1 (X) - " + xPoints;
+                        }
                     }
                     else
                     {
                         oPoints++;
                         Debug.Log("Level - O Points: " + oPoints);
+                        if (singlePlayerUI.activeSelf)
+                        {
+                            botPlayer.text = "Bot (O) - " + oPoints;
+                        }
+                        else
+                        {
+                            multiPlayer2.text = "Player 2 (O) - " + oPoints;
+                        }
                     }
 
                 }
@@ -300,11 +368,27 @@ namespace FleischerFouts.Lab6
                 {
                     xPoints++;
                     Debug.Log("Diag - X Points: " + xPoints);
+                    if (singlePlayerUI.activeSelf)
+                    {
+                        singlePlayer1.text = "Player 1 (X) - " + xPoints;
+                    }
+                    else
+                    {
+                        multiPlayer1.text = "Player 1 (X) - " + xPoints;
+                    }
                 }
                 else
                 {
                     oPoints++;
                     Debug.Log("Diag - O Points: " + oPoints);
+                    if (singlePlayerUI.activeSelf)
+                    {
+                        botPlayer.text = "Bot (O) - " + oPoints;
+                    }
+                    else
+                    {
+                        multiPlayer2.text = "Player 2 (O) - " + oPoints;
+                    }
                 }
             }
         }
