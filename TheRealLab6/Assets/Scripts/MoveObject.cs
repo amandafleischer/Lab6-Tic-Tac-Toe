@@ -65,87 +65,32 @@ namespace FleischerFouts.Lab6
 
         private void MovePiece(InputAction.CallbackContext context)
         {
-            Vector3 moveInput = context.ReadValue<Vector3>();
-            Destroy(spotSelect);
-
-            if (moveInput.x == 1)
+            if(singlePlayerUI.gameObject.activeSelf || MultiPlayerUI.gameObject.activeSelf)
             {
-                cellPosition += 1;
+                Vector3 moveInput = context.ReadValue<Vector3>();
+                Destroy(spotSelect);
 
-                if (cellPosition >= emptyCells.Count)
+                if (moveInput.x == 1)
                 {
-                    cellPosition = 0;
-                }
-            }
-            else if (moveInput.x == -1)
-            {
-                cellPosition -= 1;
+                    cellPosition += 1;
 
-                if (cellPosition < 0)
+                    if (cellPosition >= emptyCells.Count)
+                    {
+                        cellPosition = 0;
+                    }
+                }
+                else if (moveInput.x == -1)
                 {
-                    cellPosition = emptyCells.Count - 1;
+                    cellPosition -= 1;
+
+                    if (cellPosition < 0)
+                    {
+                        cellPosition = emptyCells.Count - 1;
+                    }
                 }
-            }
 
-            if (isXPiece)
-            {
-                spotSelect = Instantiate(xChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
-            }
-            else
-            {
-                //if in single player mode, no need to instantiate choosing prefab (bot)
-                if (!singlePlayerUI.gameObject.activeSelf)
-                {
-                    spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
-                }
-            }
-
-        }
-
-        private void PlacePiece(InputAction.CallbackContext context)
-        {
-            Destroy(spotSelect);
-
-            if (isXPiece)
-            {
-                Instantiate(xPlacedPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
-            }
-            else
-            {
-                //if in single player mode, choose a random empty cell to place game piece (bot)
-                if (singlePlayerUI.gameObject.activeSelf)
-                {
-                    cellPosition = UnityEngine.Random.Range(0, emptyCells.Count);
-                    Instantiate(oPlacedPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
-
-                }
-                else
-                {
-                    Instantiate(oPlacedPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
-                }
-            }
-
-
-            if (isXPiece)
-            {
-                xCells.Add(emptyCells[cellPosition]);
-            }
-            else
-            {
-                oCells.Add(emptyCells[cellPosition]);
-            }
-
-            CheckForRow();
-            isXPiece = !isXPiece;
-
-            emptyCells.Remove(emptyCells[cellPosition]);
-
-            cellPosition = 0;
-
-            if (emptyCells.Count > 0)
-            {
                 if (isXPiece)
-                { 
+                {
                     spotSelect = Instantiate(xChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
                 }
                 else
@@ -156,24 +101,87 @@ namespace FleischerFouts.Lab6
                         spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
                     }
                 }
-            }
-            else
-            {//display game over once there are no empty spaces left
-                gameOverUI.gameObject.SetActive(true);
-                //displays the winner
-                if (xPoints > oPoints)
-                { 
-                    winner.text = "Player 1 Wins!";
-                } else if (oPoints > xPoints)
+            }   
+
+        }
+
+        private void PlacePiece(InputAction.CallbackContext context)
+        {
+            if (singlePlayerUI.gameObject.activeSelf || MultiPlayerUI.gameObject.activeSelf)
+            {
+                Destroy(spotSelect);
+
+                if (isXPiece)
                 {
-                    winner.text = "Player 2 Wins!";
-                } else
-                {
-                    winner.text = "Tie Game!";
+                    Instantiate(xPlacedPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
                 }
-                singlePlayerUI.gameObject.SetActive(false);
-                MultiPlayerUI.gameObject.SetActive(false);
-            }
+                else
+                {
+                    //if in single player mode, choose a random empty cell to place game piece (bot)
+                    if (singlePlayerUI.gameObject.activeSelf)
+                    {
+                        cellPosition = UnityEngine.Random.Range(0, emptyCells.Count);
+                        Instantiate(oPlacedPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
+
+                    }
+                    else
+                    {
+                        Instantiate(oPlacedPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
+                    }
+                }
+
+
+                if (isXPiece)
+                {
+                    xCells.Add(emptyCells[cellPosition]);
+                }
+                else
+                {
+                    oCells.Add(emptyCells[cellPosition]);
+                }
+
+                CheckForRow();
+                isXPiece = !isXPiece;
+
+                emptyCells.Remove(emptyCells[cellPosition]);
+
+                cellPosition = 0;
+
+                if (emptyCells.Count > 0)
+                {
+                    if (isXPiece)
+                    {
+                        spotSelect = Instantiate(xChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
+                    }
+                    else
+                    {
+                        //if in single player mode, no need to instantiate choosing prefab (bot)
+                        if (!singlePlayerUI.gameObject.activeSelf)
+                        {
+                            spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
+                        }
+                    }
+                }
+                else
+                {//display game over once there are no empty spaces left
+                    gameOverUI.gameObject.SetActive(true);
+                    //displays the winner
+                    if (xPoints > oPoints)
+                    {
+                        winner.text = "Player 1 Wins!";
+                    }
+                    else if (oPoints > xPoints)
+                    {
+                        winner.text = "Player 2 Wins!";
+                    }
+                    else
+                    {
+                        winner.text = "Tie Game!";
+                    }
+                    singlePlayerUI.gameObject.SetActive(false);
+                    MultiPlayerUI.gameObject.SetActive(false);
+                }
+            }          
         }
 
         private void CheckForRow()
