@@ -65,7 +65,7 @@ namespace FleischerFouts.Lab6
 
         private void MovePiece(InputAction.CallbackContext context)
         {
-            if(singlePlayerUI.gameObject.activeSelf || MultiPlayerUI.gameObject.activeSelf)
+            if (singlePlayerUI.gameObject.activeSelf || MultiPlayerUI.gameObject.activeSelf)
             {
                 Vector3 moveInput = context.ReadValue<Vector3>();
                 Destroy(spotSelect);
@@ -101,7 +101,7 @@ namespace FleischerFouts.Lab6
                         spotSelect = Instantiate(oChoosingPrefab, new Vector3(emptyCells[cellPosition].transform.position.x, emptyCells[cellPosition].transform.position.y + 1.6f, emptyCells[cellPosition].transform.position.z), Quaternion.identity, parent.transform);
                     }
                 }
-            }   
+            }
 
         }
 
@@ -181,7 +181,7 @@ namespace FleischerFouts.Lab6
                     singlePlayerUI.gameObject.SetActive(false);
                     MultiPlayerUI.gameObject.SetActive(false);
                 }
-            }          
+            }
         }
 
         private void CheckForRow()
@@ -212,6 +212,7 @@ namespace FleischerFouts.Lab6
                         CheckColumnWin(pieceOne, pieceTwo, newPiece);
                         CheckLevelWin(pieceOne, pieceTwo, newPiece);
                         CheckDiagonalWin(pieceOne, pieceTwo, newPiece);
+                        CheckSameFaceDiagonalWin(pieceOne, pieceTwo, newPiece);
                     }
                 }
             }
@@ -231,7 +232,8 @@ namespace FleischerFouts.Lab6
                         if (singlePlayerUI.activeSelf)
                         {//updates score board for player 1
                             singlePlayer1.text = "Player 1 (X) - " + xPoints;
-                        } else
+                        }
+                        else
                         {
                             multiPlayer1.text = "Player 1 (X) - " + xPoints;
                         }
@@ -319,6 +321,78 @@ namespace FleischerFouts.Lab6
                         }
                     }
 
+                }
+            }
+        }
+
+        private void CheckSameFaceDiagonalWin(string one, string two, string three)
+        {
+            if ((one[0] == two[0] && two[0] == three[0]) || ((one[0] != two[0] && two[0] != three[0]) && one[0] != three[0]))
+            {
+                one = one.Substring(1);
+                two = two.Substring(1);
+                three = three.Substring(1);
+
+                if (String.Equals(one, "12") || (String.Equals(one, "21") || (String.Equals(one, "32") || String.Equals(one, "23"))))
+                {
+                    CheckSameFaceCornersWin(two, three);
+                }
+                else if (String.Equals(two, "12") || (String.Equals(two, "21") || (String.Equals(two, "32") || String.Equals(two, "23"))))
+                {
+                    CheckSameFaceCornersWin(one, three);
+                }
+                else if (String.Equals(three, "12") || (String.Equals(three, "21") || (String.Equals(three, "32") || String.Equals(three, "23"))))
+                {
+                    CheckSameFaceCornersWin(two, one);
+                }
+            }
+        }
+
+        private void CheckSameFaceCornersWin(string cornerOne, string cornerTwo)
+        {
+            bool point = false;
+            if ((String.Equals(cornerOne, "11") && String.Equals(cornerTwo, "13")) || (String.Equals(cornerOne, "11") && String.Equals(cornerTwo, "31")))
+            {
+                point = true;
+            }
+            else if ((String.Equals(cornerOne, "13") && String.Equals(cornerTwo, "11")) || (String.Equals(cornerOne, "13") && String.Equals(cornerTwo, "33")))
+            {
+                point = true;
+            }
+            else if ((String.Equals(cornerOne, "33") && String.Equals(cornerTwo, "13")) || (String.Equals(cornerOne, "33") && String.Equals(cornerTwo, "31")))
+            {
+                point = true;
+            }
+            else if ((String.Equals(cornerOne, "31") && String.Equals(cornerTwo, "11")) || (String.Equals(cornerOne, "31") && String.Equals(cornerTwo, "33")))
+            {
+                point = true;
+            }
+
+            if (point)
+            {
+                if (isXPiece)
+                {
+                    xPoints++;
+                    if (singlePlayerUI.activeSelf)
+                    {//updates score board for player 1
+                        singlePlayer1.text = "Player 1 (X) - " + xPoints;
+                    }
+                    else
+                    {
+                        multiPlayer1.text = "Player 1 (X) - " + xPoints;
+                    }
+                }
+                else
+                {
+                    oPoints++;
+                    if (singlePlayerUI.activeSelf)
+                    {//updates score board for player 2
+                        botPlayer.text = "Bot (O) - " + oPoints;
+                    }
+                    else
+                    {
+                        multiPlayer2.text = "Player 2 (O) - " + oPoints;
+                    }
                 }
             }
         }
