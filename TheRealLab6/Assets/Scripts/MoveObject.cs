@@ -220,7 +220,6 @@ namespace FleischerFouts.Lab6
                     if (isXPiece)
                     {
                         xPoints++;
-                        Debug.Log("Row - X Points: " + xPoints);
                         if (singlePlayerUI.activeSelf)
                         {//updates score board for player 1
                             singlePlayer1.text = "Player 1 (X) - " + xPoints;
@@ -232,7 +231,6 @@ namespace FleischerFouts.Lab6
                     else
                     {
                         oPoints++;
-                        Debug.Log("Row - O Points: " + oPoints);
                         if (singlePlayerUI.activeSelf)
                         {//updates score board for player 2
                             botPlayer.text = "Bot (O) - " + oPoints;
@@ -256,7 +254,6 @@ namespace FleischerFouts.Lab6
                     if (isXPiece)
                     {
                         xPoints++;
-                        Debug.Log("Column - X Points: " + xPoints);
                         if (singlePlayerUI.activeSelf)
                         {//updates score board for player 1
                             singlePlayer1.text = "Player 1 (X) - " + xPoints;
@@ -269,7 +266,6 @@ namespace FleischerFouts.Lab6
                     else
                     {
                         oPoints++;
-                        Debug.Log("Column - O Points: " + oPoints);
                         if (singlePlayerUI.activeSelf)
                         {//updates score board for player 2
                             botPlayer.text = "Bot (O) - " + oPoints;
@@ -293,7 +289,6 @@ namespace FleischerFouts.Lab6
                     if (isXPiece)
                     {
                         xPoints++;
-                        Debug.Log("Level - X Points: " + xPoints);
                         if (singlePlayerUI.activeSelf)
                         {//updates score board for player 1
                             singlePlayer1.text = "Player 1 (X) - " + xPoints;
@@ -306,7 +301,6 @@ namespace FleischerFouts.Lab6
                     else
                     {
                         oPoints++;
-                        Debug.Log("Level - O Points: " + oPoints);
                         if (singlePlayerUI.activeSelf)
                         {//updates score board for player 2
                             botPlayer.text = "Bot (O) - " + oPoints;
@@ -369,7 +363,6 @@ namespace FleischerFouts.Lab6
                 if (isXPiece)
                 {
                     xPoints++;
-                    Debug.Log("Diag - X Points: " + xPoints);
                     if (singlePlayerUI.activeSelf)
                     {//updates score board for player 1
                         singlePlayer1.text = "Player 1 (X) - " + xPoints;
@@ -382,7 +375,6 @@ namespace FleischerFouts.Lab6
                 else
                 {
                     oPoints++;
-                    Debug.Log("Diag - O Points: " + oPoints);
                     if (singlePlayerUI.activeSelf)
                     {//updates score board for player 2
                         botPlayer.text = "Bot (O) - " + oPoints;
