@@ -327,22 +327,25 @@ namespace FleischerFouts.Lab6
 
         private void CheckSameFaceDiagonalWin(string one, string two, string three)
         {
-            if ((one[0] == two[0] && two[0] == three[0]) || ((one[0] != two[0] && two[0] != three[0]) && one[0] != three[0]))
+            if ((one[0] != two[0] && two[0] != three[0]) && one[0] != three[0])
             {
-                one = one.Substring(1);
-                two = two.Substring(1);
-                three = three.Substring(1);
 
-                if (String.Equals(one, "12") || (String.Equals(one, "21") || (String.Equals(one, "32") || String.Equals(one, "23"))))
+                if (String.Equals(one, "212") || (String.Equals(one, "221") || (String.Equals(one, "232") || String.Equals(one, "223"))))
                 {
+                    two = two.Substring(1);
+                    three = three.Substring(1);
                     CheckSameFaceCornersWin(two, three);
                 }
-                else if (String.Equals(two, "12") || (String.Equals(two, "21") || (String.Equals(two, "32") || String.Equals(two, "23"))))
+                else if (String.Equals(two, "212") || (String.Equals(two, "221") || (String.Equals(two, "232") || String.Equals(two, "223"))))
                 {
+                    one = one.Substring(1);
+                    three = three.Substring(1);
                     CheckSameFaceCornersWin(one, three);
                 }
-                else if (String.Equals(three, "12") || (String.Equals(three, "21") || (String.Equals(three, "32") || String.Equals(three, "23"))))
+                else if (String.Equals(three, "212") || (String.Equals(three, "221") || (String.Equals(three, "232") || String.Equals(three, "223"))))
                 {
+                    two = two.Substring(1);
+                    three = three.Substring(1);
                     CheckSameFaceCornersWin(two, one);
                 }
             }
@@ -351,6 +354,7 @@ namespace FleischerFouts.Lab6
         private void CheckSameFaceCornersWin(string cornerOne, string cornerTwo)
         {
             bool point = false;
+
             if ((String.Equals(cornerOne, "11") && String.Equals(cornerTwo, "13")) || (String.Equals(cornerOne, "11") && String.Equals(cornerTwo, "31")))
             {
                 point = true;
@@ -401,21 +405,17 @@ namespace FleischerFouts.Lab6
         {
             if ((one[0] == two[0] && two[0] == three[0]) || ((one[0] != two[0] && two[0] != three[0]) && one[0] != three[0]))
             {
-                one = one.Substring(1);
-                two = two.Substring(1);
-                three = three.Substring(1);
-
-                if (String.Equals(one, "22"))
+                if (String.Equals(one, "222"))
                 {
-                    CheckCornersWin(two, three);
+                    CheckCornersWin(two.Substring(1), three.Substring(1));
                 }
-                else if (String.Equals(two, "22"))
+                else if (String.Equals(two.Substring(1), "222"))
                 {
-                    CheckCornersWin(one, three);
+                    CheckCornersWin(one.Substring(1), three.Substring(1));
                 }
-                else if (String.Equals(three, "22"))
+                else if (String.Equals(three, "222"))
                 {
-                    CheckCornersWin(two, one);
+                    CheckCornersWin(two.Substring(1), one.Substring(1));
                 }
             }
         }
