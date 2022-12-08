@@ -403,17 +403,32 @@ namespace FleischerFouts.Lab6
 
         private void CheckDiagonalWin(string one, string two, string three)
         {
-            if ((one[0] == two[0] && two[0] == three[0]) || ((one[0] != two[0] && two[0] != three[0]) && one[0] != three[0]))
+            if (one[0] == two[0] && two[0] == three[0])
             {
-                if (String.Equals(one, "222"))
+                if (String.Equals(one.Substring(1), "22"))
                 {
                     CheckCornersWin(two.Substring(1), three.Substring(1));
                 }
-                else if (String.Equals(two.Substring(1), "222"))
+                else if (String.Equals(two.Substring(1), "22"))
                 {
                     CheckCornersWin(one.Substring(1), three.Substring(1));
                 }
-                else if (String.Equals(three, "222"))
+                else if (String.Equals(three.Substring(1), "22"))
+                {
+                    CheckCornersWin(two.Substring(1), one.Substring(1));
+                }
+            }
+            else if ((one[0] != two[0] && two[0] != three[0]) && one[0] != three[0])
+            {
+                if (String.Equals(one.Substring(1), "22") && one[0] == '2')
+                {
+                    CheckCornersWin(two.Substring(1), three.Substring(1));
+                }
+                else if (String.Equals(two.Substring(1), "22") && two[0] == '2')
+                {
+                    CheckCornersWin(one.Substring(1), three.Substring(1));
+                }
+                else if (String.Equals(three.Substring(1), "22") && three[0] == '2')
                 {
                     CheckCornersWin(two.Substring(1), one.Substring(1));
                 }
